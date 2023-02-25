@@ -32,32 +32,13 @@ __version__ = "0.0.1"
 
 ################################################################################
 # Imports
+import pytest
+from src.fizzbuzz import fizzbuzz
 
-################################################################################
-# Variables
-
-################################################################################
-# Functions
-
-def fizzbuzz(val):
-    """_summary_
-
-    Args:
-        val (int): _description_
-
-    Returns:
-        str: _description_
+def test_given_input_number_is_zero_calculating_fizzbuzz_will_return_zero():
     """
-    return val
-
-def main():
-    """main function of the fizzbuzz module
+        This function tests that calc FizzBuzz returns zero if given
+        input number is zero.
     """
-    ret:str = fizzbuzz(1)
-
-    print("fizzbuzz result is ", ret)
-
-################################################################################
-# Scripts
-if __name__ == "__main__":
-    main()
+    val = fizzbuzz(0)
+    assert val == "0"
