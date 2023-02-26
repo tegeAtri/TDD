@@ -39,25 +39,57 @@ __version__ = "0.0.1"
 ################################################################################
 # Functions
 
-def fizzbuzz(val):
+def fizzbuzz(val) -> str:
+    """calculates the fizzbuzz from val
+
+    Args:
+        val (int): input value
+
+    Returns:
+        str: string of the input value
+    """
+    if isinstance(val, int):
+        return calc(val)
+    raise ValueError
+
+def calc(val:int) -> str:
     """_summary_
 
     Args:
-        val (int): _description_
+        val (_type_): _description_
 
     Returns:
-        str: _description_
+        _type_: _description_
     """
-    return val
+    res:str = ''
 
-def main():
-    """main function of the fizzbuzz module
+    if is_val_fizz(val) and is_val_buzz(val):
+        res = "fizzbuzz"
+    elif is_val_fizz(val):
+        res = "fizz"
+    elif is_val_buzz (val):
+        res = "buzz"
+    else:
+        res = str(val)
+
+    return res
+
+def is_val_fizz(val:int) -> bool:
+    """Check if val is a multiple of three
+
+    Args:
+        val (int): _description_
     """
-    ret:str = fizzbuzz(1)
+    if (val % 3 == 0) and (val != 0):
+        return True
+    return False
 
-    print("fizzbuzz result is ", ret)
+def is_val_buzz(val:int) -> bool:
+    """Check if val is a multiple of five
 
-################################################################################
-# Scripts
-if __name__ == "__main__":
-    main()
+    Args:
+        val (int): _description_
+    """
+    if (val % 5 == 0) and (val != 0):
+        return True
+    return False
