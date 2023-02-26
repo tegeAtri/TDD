@@ -27,7 +27,7 @@ __email__ =  "patrik.tegetmeier@web.de"
 __license__ = "GPLv3"
 __maintainer__ = "developer"
 __status__ = "Production"
-__version__ = "0.0.1"
+__version__ = "1.0.0"
 
 
 ################################################################################
@@ -35,6 +35,8 @@ __version__ = "0.0.1"
 
 ################################################################################
 # Variables
+FIZZ = 3
+BUZZ = 5
 
 ################################################################################
 # Functions
@@ -56,10 +58,10 @@ def calc(val:int) -> str:
     """_summary_
 
     Args:
-        val (_type_): _description_
+        val (int): input value
 
     Returns:
-        _type_: _description_
+        string: the string of the input value
     """
     res:str = ''
 
@@ -78,9 +80,12 @@ def is_val_fizz(val:int) -> bool:
     """Check if val is a multiple of three
 
     Args:
-        val (int): _description_
+        val (int): input value
+
+    Returns:
+        bool: true if value is a fizz, else false
     """
-    if (val % 3 == 0) and (val != 0):
+    if (val % FIZZ == 0) and (val != 0):
         return True
     return False
 
@@ -88,8 +93,11 @@ def is_val_buzz(val:int) -> bool:
     """Check if val is a multiple of five
 
     Args:
-        val (int): _description_
+        val (int): input value
+
+    Returns:
+        bool: true if value is a buzz, else false
     """
-    if (val % 5 == 0) and (val != 0):
+    if (val % BUZZ == 0) and (val != 0):
         return True
     return False
