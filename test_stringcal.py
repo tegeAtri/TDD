@@ -36,5 +36,32 @@ import pytest
 from src.stringcal import stringcal
 
 def test_given_input_string_is_empty_stringcal_will_return_zero():
+    """_summary_
+    """
+    val: int
     val = stringcal('')
     assert val == 0
+
+@pytest.mark.parametrize("test_input,expected", [('1', 1), ('0', 0), ('4', 4), ('12', 12)])
+def test_given_input_string_is_value_stringcal_will_return_value(test_input,expected):
+    """_summary_
+    """
+    val: int
+    val = stringcal(test_input)
+    assert val == expected
+
+@pytest.mark.parametrize("test_input,expected", [('0,0', 0), ('1,1', 2), ('3,2', 5), ('10,12', 22)])
+def test_given_input_string_has_two_stings_stringcal_will_return_the_sum_of_both(test_input,expected):
+    """_summary_
+    """
+    val: int
+    val = stringcal(test_input)
+    assert val == expected
+
+@pytest.mark.parametrize("test_input,expected", [('0,0,0', 0), ('1,1,1,1', 4), ('3,2,2,3,1,1', 12), ('10,9,8,7,6,5,4,3,2,1', 55)])
+def test_given_input_string_has_multiple_stings_stringcal_will_return_the_sum_of_all(test_input,expected):
+    """_summary_
+    """
+    val: int
+    val = stringcal(test_input)
+    assert val == expected

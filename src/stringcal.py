@@ -39,7 +39,7 @@ __version__ = "0.0.1"
 ################################################################################
 # Functions
 
-def stringcal(numstring:str) -> int:
+def stringcal(numstring) -> int:
     """calculates an integer sum out of the string arguments
 
     Args:
@@ -48,5 +48,22 @@ def stringcal(numstring:str) -> int:
     Returns:
         int: sum of the string input
     """
-    if numstring is "":
-        return 0
+    if isinstance(numstring, str):
+        return calc(numstring)
+    raise ValueError
+
+def calc(numstr: str) ->int:
+    """_summary_
+
+    Args:
+        numstr (str): _description_
+
+    Returns:
+        int: _description_
+    """
+
+    summands = numstr.split(",")
+    res: int = 0
+    for _, value in enumerate(summands):
+        res += int(value)
+    return res
