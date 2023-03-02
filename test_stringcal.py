@@ -65,3 +65,25 @@ def test_given_input_string_has_multiple_stings_stringcal_will_return_the_sum_of
     val: int
     val = stringcal(test_input)
     assert val == expected
+
+@pytest.mark.parametrize("test_input,expected", [('0\n0\n0', 0), ('1\n1\n1\n1', 4), ('3\n2\n2\n3\n1\n1', 12), ('10\n9\n8\n7\n6\n5\n4\n3\n2\n1', 55)])
+def test_given_input_string_has_multiple_stings_with_diff_sep_stringcal_will_return_the_sum_of_all(test_input,expected):
+    """_summary_
+    """
+    val: int
+    val = stringcal(test_input)
+    assert val == expected
+
+@pytest.mark.parametrize("test_input,expected", [('1,2\n3', 6), ('1\n2,3', 6)])
+def test_given_input_string_has_diff_delimiter_included_stringcal_will_return_sum_for_valid_delimter(test_input,expected):
+    """_summary_
+    """
+    val: int
+    val = stringcal(test_input)
+    assert val == expected
+
+def test_given_input_string_has_delimiter_at_the_end_stringcal_will_return_error():
+    """_summary_
+    """
+    with pytest.raises(ValueError):
+        assert stringcal('1,2,')
