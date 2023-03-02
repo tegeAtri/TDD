@@ -32,6 +32,7 @@ __version__ = "0.0.1"
 
 ################################################################################
 # Imports
+import re
 
 ################################################################################
 # Variables
@@ -49,7 +50,8 @@ def stringcal(numstring) -> int:
         int: sum of the string input
     """
     if isinstance(numstring, str):
-        return calc(numstring)
+        if re.search(r'\D$',numstring) is None:
+            return calc(numstring)
     raise ValueError
 
 def calc(numstr: str) ->int:
@@ -61,9 +63,31 @@ def calc(numstr: str) ->int:
     Returns:
         int: _description_
     """
-
-    summands = numstr.split(",")
+    summands = numstr.split("\n")
     res: int = 0
-    for _, value in enumerate(summands):
-        res += int(value)
+    res = sumup(summands)
+
     return res
+
+def sumup(summands) -> int:
+    """_summary_
+
+    Args:
+        summands (_type_): _description_
+
+    Returns:
+        int: _description_
+    """
+    result: int = 0
+    for _, value in enumerate(summands):
+        match = re.search(r'\D',value)
+        if match is not None:
+            if match.group() == ',':
+                subsum = value.split(',')
+                for _, val in enumerate(subsum):
+                    result += int(val)
+        else:
+            result += int(value)
+    
+    return result
+
