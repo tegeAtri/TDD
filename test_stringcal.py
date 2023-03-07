@@ -87,3 +87,11 @@ def test_given_input_string_has_delimiter_at_the_end_stringcal_will_return_error
     """
     with pytest.raises(ValueError):
         assert stringcal('1,2,')
+
+@pytest.mark.parametrize("test_input,expected", [('//;\n1;3', 4), ('//|\n1|2|3', 6), ('//sep\n2sep5', 7)])
+def test_given_input_string_will_change_delimiter_stringcal_will_return_switch_and_sum(test_input,expected):
+    """_summary_
+    """
+    val: int
+    val = stringcal(test_input)
+    assert val == expected
