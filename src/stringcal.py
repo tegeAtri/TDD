@@ -51,10 +51,10 @@ def stringcal(numstring) -> int:
     """
     if isinstance(numstring, str):
         if re.search(r'\D$',numstring) is None:
-            return calc(numstring)
+            return convert_and_calculate_values(numstring)
     raise ValueError
 
-def calc(numstr: str) ->int:
+def convert_and_calculate_values(numstr: str) ->int:
     """_summary_
 
     Args:
@@ -63,13 +63,34 @@ def calc(numstr: str) ->int:
     Returns:
         int: _description_
     """
-    summands = numstr.split("\n")
+    delimiter, numstr = define_separator(numstr)
+    summands = numstr.split(delimiter)
     res: int = 0
-    res = sumup(summands)
+    res = convert_and_sumup(summands)
 
     return res
 
-def sumup(summands) -> int:
+def define_separator(numberstring) -> str:
+    """_summary_
+
+    Args:
+        numberstring (_type_): _description_
+
+    Returns:
+        str: _description_
+    """
+    separator: str = '\n'
+    if numberstring.startswith('//'):
+        mat = re.search(r'(?<=//)[\s|\S]+(?=\n)',numberstring)
+        if mat is not None:
+            separator = mat.group()
+            p = re.compile(r'//[\s|\S]+\n')
+            numberstring = p.sub('',numberstring)
+            print("string. ", numberstring)
+
+    return separator, numberstring
+
+def convert_and_sumup(summands) -> int:
     """_summary_
 
     Args:
@@ -80,14 +101,39 @@ def sumup(summands) -> int:
     """
     result: int = 0
     for _, value in enumerate(summands):
-        match = re.search(r'\D',value)
-        if match is not None:
-            if match.group() == ',':
-                subsum = value.split(',')
-                for _, val in enumerate(subsum):
-                    result += int(val)
-        else:
-            result += int(value)
-    
+        result += look_for_separators(value)
+
     return result
 
+def look_for_separators(value):
+    """_summary_
+
+    Args:
+        value (_type_): _description_
+    """
+    result: int = 0
+    match = re.search(r'\D',value)
+    if match is not None:
+        result = sum_different_separator_sum(value, match)
+    else:
+        result = int(value)
+
+    return result
+
+def sum_different_separator_sum(value, match):
+    """_summary_
+
+    Args:
+        value (_type_): _description_
+        match (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    result: int = 0
+    if match.group() == ',':
+        subsum = value.split(',')
+        for _, val in enumerate(subsum):
+            result += int(val)
+
+    return result
