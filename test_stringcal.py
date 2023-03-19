@@ -95,3 +95,9 @@ def test_given_input_string_will_change_delimiter_stringcal_will_return_switch_a
     val: int
     val = stringcal(test_input)
     assert val == expected
+
+def test_given_input_string_include_doubled_delimiter_stringcal_will_return_an_erro():
+    """_summary_
+    """
+    with pytest.raises(ValueError):
+        assert stringcal('//|\n1|2,3')

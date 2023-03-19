@@ -63,10 +63,11 @@ def convert_and_calculate_values(numstr: str) ->int:
     Returns:
         int: _description_
     """
-    delimiter, numstr = define_separator(numstr)
-    summands = numstr.split(delimiter)
     res: int = 0
-    res = convert_and_sumup(summands)
+    if numstr != '':
+        delimiter, numstr = define_separator(numstr)
+        summands = numstr.split(delimiter)
+        res = convert_and_sumup(summands)
 
     return res
 
